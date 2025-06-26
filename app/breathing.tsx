@@ -4,6 +4,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useRouter } from 'expo-router';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { completeDrill } from '@/utils/storage';
 
 const BREATH_CYCLE_DURATION = 16000; // 16 seconds total (4s per phase)
 const PHASE_DURATION = BREATH_CYCLE_DURATION / 4;
@@ -82,8 +83,10 @@ export default function BreathingScreen() {
     return () => loop.stop();
   }, [isActive]);
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     setIsActive(false);
+    // Mark drill as completed and update streak/points
+    await completeDrill();
     router.push('/');
   };
 

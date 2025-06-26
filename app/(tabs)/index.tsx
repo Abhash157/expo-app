@@ -1,11 +1,28 @@
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
+import { getStreakCount, getConfidencePoints } from '@/utils/storage';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const [streak, setStreak] = useState(0);
+  const [points, setPoints] = useState(0);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const [currentStreak, currentPoints] = await Promise.all([
+        getStreakCount(),
+        getConfidencePoints(),
+      ]);
+      setStreak(currentStreak);
+      setPoints(currentPoints);
+    };
+
+    loadData();
+  }, []);
 
   const startDrill = () => {
     // Navigate to the scenario screen
@@ -42,16 +59,20 @@ export default function HomeScreen() {
 
         <View style={styles.statsContainer}>
           <View style={styles.statItem}>
-            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
-            <ThemedText style={styles.statLabel}>Day Streak</ThemedText>
+            <ThemedText type="title" style={styles.statNumber}>{streak}</ThemedText>
+            <ThemedText style={styles.statLabel}>
+              {streak === 1 ? 'Day' : 'Days'} Streak
+              {streak > 0 && ' 🔥'}
+            </ThemedText>
           </View>
           <View style={styles.statItem}>
-            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
-            <ThemedText style={styles.statLabel}>Total Drills</ThemedText>
-          </View>
-          <View style={styles.statItem}>
-            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
-            <ThemedText style={styles.statLabel}>Minutes</ThemedText>
+            <ThemedText type="title" style={styles.statNumber}>
+              {points}
+            </ThemedText>
+            <ThemedText style={styles.statLabel}>
+              Confidence {points === 1 ? 'Point' : 'Points'}
+              {points >= 100 && ' 🏆'}
+            </ThemedText>
           </View>
         </View>
       </View>
