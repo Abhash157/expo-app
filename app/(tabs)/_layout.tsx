@@ -3,10 +3,10 @@ import React from 'react';
 import { Platform } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -30,28 +30,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={24} name="house.fill" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={24} name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="exercises"
         options={{
           title: 'Exercises',
-          tabBarIcon: ({ color }) => <IconSymbol size={24} name="flame.fill" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={24} name="flame" color={color} />,
         }}
       />
       <Tabs.Screen
         name="history"
         options={{
           title: 'History',
-          tabBarIcon: ({ color }) => <IconSymbol size={24} name="clock.fill" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={24} name="time" color={color} />,
         }}
       />
       <Tabs.Screen
         name="achievements"
         options={{
           title: 'Achievements',
-          tabBarIcon: ({ color }) => <IconSymbol size={24} name="trophy.fill" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={24} name="trophy" color={color} />,
         }}
       />
     </Tabs>
