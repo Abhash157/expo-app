@@ -1,75 +1,143 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  const startDrill = () => {
+    // Navigate to the scenario screen
+    router.push('/scenario');
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ThemedView style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.header}>
+          <ThemedText type="title" style={styles.title}>
+            MindGym
+          </ThemedText>
+          <ThemedText type="subtitle" style={styles.subtitle}>
+            Your daily mental workout
+          </ThemedText>
+        </View>
+
+        <View style={styles.card}>
+          <ThemedText style={styles.cardTitle}>Daily Mental Workout</ThemedText>
+          <ThemedText style={styles.cardText}>
+            Face real-world anxiety triggers, reframe your thoughts, and build calm confidence — in under 5 minutes a day.
+          </ThemedText>
+          
+          <TouchableOpacity 
+            style={styles.button} 
+            onPress={startDrill}
+            activeOpacity={0.8}
+          >
+            <FontAwesome5 name="brain" size={20} color="white" style={styles.buttonIcon} />
+            <ThemedText style={styles.buttonText}>Start Today's Drill</ThemedText>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
+            <ThemedText style={styles.statLabel}>Day Streak</ThemedText>
+          </View>
+          <View style={styles.statItem}>
+            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
+            <ThemedText style={styles.statLabel}>Total Drills</ThemedText>
+          </View>
+          <View style={styles.statItem}>
+            <ThemedText type="title" style={styles.statNumber}>0</ThemedText>
+            <ThemedText style={styles.statLabel}>Minutes</ThemedText>
+          </View>
+        </View>
+      </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    padding: 20,
   },
-  stepContainer: {
-    gap: 8,
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  header: {
+    marginTop: 40,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  subtitle: {
+    fontSize: 18,
+    opacity: 0.8,
+  },
+  card: {
+    backgroundColor: 'rgba(100, 181, 246, 0.15)',
+    borderRadius: 20,
+    padding: 25,
+    marginBottom: 30,
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  cardText: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 25,
+    opacity: 0.9,
+  },
+  button: {
+    flexDirection: 'row',
+    backgroundColor: '#4A90E2',
+    borderRadius: 30,
+    paddingVertical: 18,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  buttonIcon: {
+    marginRight: 10,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 'auto',
+    marginBottom: 20,
+  },
+  statItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 14,
+    opacity: 0.7,
   },
 });
