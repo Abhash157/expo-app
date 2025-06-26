@@ -29,14 +29,14 @@ export default function ExercisesScreen() {
   return (
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <ThemedText type="title" style={styles.title}>
             Exercises
           </ThemedText>
           <ThemedText style={styles.subtitle}>
             Choose an exercise to start your mental fitness journey
           </ThemedText>
-        </View>
+        </View> */}
 
         <View style={styles.packsContainer}>
           {exercisePacks.map((pack) => (

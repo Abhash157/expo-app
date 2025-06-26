@@ -47,7 +47,7 @@ export const exercisePacks: ExercisePack[] = [
     title: 'Social Confidence',
     description: '5-day training to overcome social anxiety and build confidence in social situations',
     icon: 'users',
-    color: '#4A90E2',
+    color: 'rgba(100, 181, 246, 0.15)',
     duration: '5 days',
     difficulty: 'Beginner',
     days: [
@@ -175,7 +175,7 @@ export const exercisePacks: ExercisePack[] = [
     title: 'Overthinking Detox',
     description: '5-day program to break free from overthinking and analysis paralysis',
     icon: 'brain',
-    color: '#9C27B0',
+    color: 'rgba(100, 181, 246, 0.15)',
     duration: '5 days',
     difficulty: 'Intermediate',
     days: [
@@ -218,7 +218,7 @@ export const exercisePacks: ExercisePack[] = [
     title: 'Emotion Regulation',
     description: '5-day training to understand and manage your emotions effectively',
     icon: 'heart',
-    color: '#E91E63',
+    color: 'rgba(100, 181, 246, 0.15)',
     duration: '5 days',
     difficulty: 'Intermediate',
     days: [
