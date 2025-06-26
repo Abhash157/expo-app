@@ -21,8 +21,7 @@ export default function DayScreen() {
   }
 
   const startExercise = (exerciseId: string) => {
-    // Navigate to exercise screen
-    console.log('Start exercise:', exerciseId);
+    router.push(`/exercise/${exerciseId}`);
   };
 
   return (
