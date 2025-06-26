@@ -1,9 +1,9 @@
-import { StyleSheet, TouchableOpacity, View, ScrollView } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { exercisePacks } from '@/data/exercises';
-import { useRouter } from 'expo-router';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function ExercisesScreen() {
   const router = useRouter();
@@ -31,10 +31,10 @@ export default function ExercisesScreen() {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <ThemedText type="title" style={styles.title}>
-            Exercise Packs
+            Exercises
           </ThemedText>
           <ThemedText style={styles.subtitle}>
-            Choose a pack to start your mental fitness journey
+            Choose an exercise to start your mental fitness journey
           </ThemedText>
         </View>
 

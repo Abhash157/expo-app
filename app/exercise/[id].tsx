@@ -4,40 +4,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { getExerciseById } from '@/data/exercises';
 
 type ExerciseStep = {
   id: string;
   type: 'instruction' | 'timer' | 'reflection';
   content: string;
   duration?: number; // in seconds
-};
-
-const exerciseSteps: Record<string, ExerciseStep[]> = {
-  // Social Confidence - Day 1 - Mirror Practice
-  'sc-1-1': [
-    {
-      id: '1',
-      type: 'instruction',
-      content: 'Find a quiet space with a mirror where you can stand comfortably.',
-    },
-    {
-      id: '2',
-      type: 'instruction',
-      content: 'Stand about an arm\'s length away from the mirror.',
-    },
-    {
-      id: '3',
-      type: 'timer',
-      content: 'Look into your own eyes for 2 minutes',
-      duration: 120, // 2 minutes in seconds
-    },
-    {
-      id: '4',
-      type: 'reflection',
-      content: 'How did it feel to maintain eye contact with yourself?',
-    },
-  ],
-  // Add more exercises as needed
 };
 
 export default function ExerciseScreen() {
@@ -48,7 +21,8 @@ export default function ExerciseScreen() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   
-  const steps = exerciseSteps[id || ''] || [];
+  const exercise = id ? getExerciseById(id) : null;
+  const steps = exercise?.steps || [];
   const currentStep = steps[currentStepIndex];
   const progress = steps.length > 0 ? (currentStepIndex / steps.length) * 100 : 0;
 
@@ -119,10 +93,16 @@ export default function ExerciseScreen() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  if (!currentStep) {
+  if (!exercise || !currentStep) {
     return (
-      <ThemedView style={styles.container}>
-        <ThemedText>Exercise not found</ThemedText>
+      <ThemedView style={[styles.container, styles.centerContent]}>
+        <ThemedText style={styles.notFoundText}>Exercise not found</ThemedText>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <ThemedText style={styles.backButtonText}>Go Back</ThemedText>
+        </TouchableOpacity>
       </ThemedView>
     );
   }
@@ -137,6 +117,15 @@ export default function ExerciseScreen() {
             { width: `${progress}%` },
           ]} 
         />
+      </View>
+
+      <View style={styles.header}>
+        <ThemedText type="title" style={styles.exerciseTitle}>
+          {exercise.title}
+        </ThemedText>
+        <ThemedText style={styles.exerciseDescription}>
+          {exercise.description}
+        </ThemedText>
       </View>
 
       <ScrollView 
@@ -236,6 +225,40 @@ export default function ExerciseScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  centerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  notFoundText: {
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  backButton: {
+    backgroundColor: '#4A90E2',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  backButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  header: {
+    padding: 20,
+    paddingBottom: 10,
+  },
+  exerciseTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  exerciseDescription: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 10,
   },
   progressBarContainer: {
     height: 4,

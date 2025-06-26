@@ -251,6 +251,84 @@ export const exercisePacks: ExercisePack[] = [
               },
             ],
           },
+          {
+            id: 'er-1-2',
+            title: 'Body Scan Meditation',
+            description: 'A 5-minute body scan to connect with physical sensations and emotions.',
+            duration: '7 min',
+            difficulty: 'Beginner',
+            completed: false,
+            steps: [
+              {
+                id: '1',
+                type: 'instruction',
+                content: 'Find a comfortable seated or lying position. Close your eyes and take three deep breaths.'
+              },
+              {
+                id: '2',
+                type: 'instruction',
+                content: 'Starting from your toes, slowly bring awareness to each part of your body.'
+              },
+              {
+                id: '3',
+                type: 'timer',
+                content: 'Spend 5 minutes scanning your body from toes to head',
+                duration: 300, // 5 minutes
+              },
+              {
+                id: '4',
+                type: 'reflection',
+                content: 'What physical sensations did you notice? Did they connect to any emotions?',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        day: 2,
+        title: 'Emotion Regulation Techniques',
+        exercises: [
+          {
+            id: 'er-2-1',
+            title: 'Box Breathing',
+            description: 'Practice the box breathing technique to regulate your nervous system.',
+            duration: '5 min',
+            difficulty: 'Beginner',
+            completed: false,
+            steps: [
+              {
+                id: '1',
+                type: 'instruction',
+                content: 'Sit comfortably with your back straight. Place one hand on your chest and one on your belly.'
+              },
+              {
+                id: '2',
+                type: 'instruction',
+                content: 'Inhale deeply through your nose for 4 seconds, feeling your belly rise.'
+              },
+              {
+                id: '3',
+                type: 'instruction',
+                content: 'Hold your breath for 4 seconds.'
+              },
+              {
+                id: '4',
+                type: 'instruction',
+                content: 'Exhale slowly through your mouth for 4 seconds.'
+              },
+              {
+                id: '5',
+                type: 'timer',
+                content: 'Repeat this box breathing pattern for 5 minutes',
+                duration: 300, // 5 minutes
+              },
+              {
+                id: '6',
+                type: 'reflection',
+                content: 'How do you feel after practicing box breathing?',
+              },
+            ],
+          },
         ],
       },
     ],
